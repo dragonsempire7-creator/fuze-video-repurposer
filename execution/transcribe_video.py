@@ -63,9 +63,6 @@ def main(video_url: str, output_path: str) -> bool:
         # Gestione variante output (struttura tipica pintostudio)
         # DEBUG: Dump item keys
         logger.info(f"Item keys: {item.keys()}")
-        with open(".tmp/debug_item.json", "w") as f:
-            json.dump(item, f, indent=2, default=str)
-
         if "data" in item and isinstance(item["data"], list):
             segments = item["data"]
             transcript_text = " ".join([s.get("text", "").strip() for s in segments])
