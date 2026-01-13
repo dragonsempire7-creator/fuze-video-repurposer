@@ -8,11 +8,11 @@ import json
 import argparse
 import logging
 from pathlib import Path
-from dotenv import load_dotenv
-from apify_client import ApifyClient
-
-# Carica variabili d'ambiente
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
