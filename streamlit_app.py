@@ -7,6 +7,20 @@ from pathlib import Path
 # Base directory
 BASE_DIR = Path(__file__).parent.resolve()
 
+# Initialize session state BEFORE functions that use it
+if 'current_step' not in st.session_state:
+    st.session_state.current_step = 0
+if 'video_url' not in st.session_state:
+    st.session_state.video_url = ""
+if 'transcript_data' not in st.session_state:
+    st.session_state.transcript_data = None
+if 'topics_data' not in st.session_state:
+    st.session_state.topics_data = None
+if 'research_data' not in st.session_state:
+    st.session_state.research_data = None
+if 'script_content' not in st.session_state:
+    st.session_state.script_content = None
+
 # ... (rest of config)
 
 def run_command(command):
