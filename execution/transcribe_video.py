@@ -14,6 +14,8 @@ try:
 except ImportError:
     pass
 
+from apify_client import ApifyClient
+
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
