@@ -1,103 +1,19 @@
 import streamlit as st
 import subprocess
 import json
+import sys
 from pathlib import Path
 
 # Base directory
 BASE_DIR = Path(__file__).parent.resolve()
 
-# Configura pagina
-st.set_page_config(
-    page_title="Fuze Agency | Video Repurposer",
-    page_icon="🚀",
-    layout="wide",
-    initial_sidebar_state="collapsed"
-)
-
-# Custom CSS
-st.markdown("""
-<style>
-    .stApp {
-        background-color: #0a0e1a;
-        color: white;
-    }
-    h1, h2, h3 {
-        color: #ffffff;
-        font-family: 'Inter', sans-serif;
-    }
-    h1 {
-        background: linear-gradient(90deg, #9d4edd, #d946ef);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-weight: 800;
-    }
-    .stButton>button {
-        background: linear-gradient(135deg, #9d4edd 0%, #d946ef 100%);
-        color: white;
-        border: none;
-        padding: 16px 32px;
-        border-radius: 24px;
-        font-weight: 600;
-        font-size: 1.1rem;
-        transition: all 0.3s ease;
-    }
-    .stButton>button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(157, 78, 221, 0.4);
-    }
-    .step-indicator {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin: 30px 0;
-    }
-    .step-dot {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-    }
-    .step-active {
-        background: linear-gradient(135deg, #9d4edd, #d946ef);
-        color: white;
-    }
-    .step-done {
-        background: #22c55e;
-        color: white;
-    }
-    .step-pending {
-        background: #1e293b;
-        color: #64748b;
-        border: 2px solid #334155;
-    }
-    .big-card {
-        background: #121b2e;
-        border: 1px solid rgba(157, 78, 221, 0.3);
-        border-radius: 16px;
-        padding: 40px;
-        margin: 20px 0;
-    }
-</style>
-""", unsafe_allow_html=True)
-
-# Initialize session state
-if 'current_step' not in st.session_state:
-    st.session_state.current_step = 0
-if 'video_url' not in st.session_state:
-    st.session_state.video_url = ""
-if 'transcript_data' not in st.session_state:
-    st.session_state.transcript_data = None
-if 'topics_data' not in st.session_state:
-    st.session_state.topics_data = None
-if 'research_data' not in st.session_state:
-    st.session_state.research_data = None
-if 'script_content' not in st.session_state:
-    st.session_state.script_content = None
+# ... (rest of config)
 
 def run_command(command):
+    # Ensure command uses the current python interpreter
+    if command[0] == "python3":
+        command[0] = sys.executable
+    
     result = subprocess.run(command, shell=False, capture_output=True, text=True, cwd=str(BASE_DIR))
     return result.returncode == 0, result.stderr
 
