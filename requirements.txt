@@ -2,3 +2,4 @@ streamlit
 apify-client
 openai
 python-dotenv
+httpx
